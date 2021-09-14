@@ -92,15 +92,18 @@ public class userController {
         System.out.println("user name2 " +loginUserRepository.validateUser(user));
         System.out.println("user name3 " +loginUserRepository.getTeacherStatus(user));
         System.out.println("id " +loginUserRepository.getUserID(user));
+        System.out.println("all data " +userRepository.findById(Long.valueOf(loginUserRepository.getUserID(user))).get());
         String userType = loginUserRepository.validateUser(user);
         String status = loginUserRepository.getTeacherStatus(user);
         String id = loginUserRepository.getUserID(user);
+        Optional<User> users = userRepository.findById(Long.valueOf(loginUserRepository.getUserID(user)));
         ArrayList<String> list = new ArrayList<String>();
         list.add(status);
         list.add(userType);
         list.add(id);
+
         try {
-            return new ResponseEntity<>(list , HttpStatus.OK);
+            return new ResponseEntity<>(users.get() , HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage() , HttpStatus.OK);
         }
