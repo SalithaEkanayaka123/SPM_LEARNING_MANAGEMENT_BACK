@@ -28,6 +28,8 @@ public class userController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    //PasswordEncoder passwordEncoder;
+
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers(){
         List<User> users = loginUserRepository.getUserList();
